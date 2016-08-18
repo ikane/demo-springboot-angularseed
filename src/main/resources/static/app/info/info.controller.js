@@ -33,7 +33,7 @@ angular.module('demoAngularGeneratedApp')
 	    	$log.info(vm.formData);
 	    	
 	    	// Simple POST request example (passing data) :
-	    	$http.post('info', vm.formData).
+	    	$http.post('api/info', vm.formData).
 	    	  success(function(data, status, headers, config) {
 	    		  
 	    		  
