@@ -20,5 +20,17 @@ function AboutController() {
     ];
     
     vm.message = "Message from about controller";
+    
+    vm.customer={
+			'name':'Ibrahima',
+			'address':'1 rue Antoine de Saint Exupery, 94270 Le KB'
+		};
+    
+    vm.changeData = function() {
+    	vm.customer={
+    			'name':'Verifone',
+    			'address':'11a rue Jacques Cartier, 78280 Guyancourt'
+    		};
+    };
 }
 })();

@@ -3,3 +3,34 @@
 <br>
 
 <h3> Message: {{about.message}} </h3>
+
+<p><b>Shared Scope directive</b></p>
+
+<shared-scope></shared-scope>
+
+<br><br>
+
+<p><b>Isolate Scope directive</b></p>
+<isolate-scope></isolate-scope>
+
+
+<br><br>
+
+<p><b>Isolate Scope With String directive</b></p>
+<isolate-scope-with-string name="{{about.customer.name}}" address="{{about.customer.address}}"></isolate-scope-with-string>
+
+<br><br>
+
+<p><b>Isolate Scope With Object directive</b></p>
+<isolate-scope-with-object datasource="about.customer"></isolate-scope-with-object>
+
+<br><br>
+
+<p><b>Isolate Scope With Event directive</b></p>
+<isolate-scope-with-event datasource="about.customer" action="about.changeData()"></isolate-scope-with-event>
+
+<br><br>
+
+<hr>
+<h3>Simple Dom Directive</h3>
+<div link-demo>Click Me</div>

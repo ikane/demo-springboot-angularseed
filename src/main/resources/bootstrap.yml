@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: demo-springboot-angularseed
+
+info: 
+  applicaton: demo-springboot-angularseed
+  description: demo-springboot-angularseed
+  appVersion: v@project.version@

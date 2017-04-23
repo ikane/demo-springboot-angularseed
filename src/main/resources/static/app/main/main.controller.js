@@ -19,5 +19,10 @@
 	      'Bootstrap',
 	      'Karma'
 	    ];
+		
+		vm.customer={
+			'name':'Ibrahima',
+			'address':'1 rue Antoine de Saint Exupery, 94270 Le KB'
+		};
 	}
 })();
