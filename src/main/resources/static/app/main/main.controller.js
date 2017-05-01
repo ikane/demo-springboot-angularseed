@@ -1,16 +1,6 @@
 (function() {
 	'use strict';
 	
-	/**
-	 * @ngdoc function
-	 * @name demoAngularGeneratedApp.controller:MainCtrl
-	 * @description
-	 * # MainCtrl
-	 * Controller of the demoAngularGeneratedApp
-	 */
-	angular.module('demoAngularGeneratedApp')
-	  .controller('MainController', MainController);
-	
 	function MainController () {
 	    var vm = this;
 		vm.awesomeThings = [
@@ -25,4 +15,14 @@
 			'address':'1 rue Antoine de Saint Exupery, 94270 Le KB'
 		};
 	}
+	
+	/**
+	 * @ngdoc function
+	 * @name demoAngularGeneratedApp.controller:MainCtrl
+	 * @description
+	 * # MainCtrl
+	 * Controller of the demoAngularGeneratedApp
+	 */
+	angular.module('demoAngularGeneratedApp')
+	  .controller('MainController', MainController);
 })();
