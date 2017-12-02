@@ -22,6 +22,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<rpm.release>1</rpm.release>
+		<app.home>/home/administrator/microservices</app.home>
+		<app.username>administrator</app.username>
+		<app.group>administrator</app.group>
 	</properties>
 
 	<dependencies>
@@ -51,6 +55,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -134,5 +139,82 @@
 		</dependencies>
 	</dependencyManagement>
 
+<profiles>
+		<profile>
+			<id>rpmbuild</id>
+			<build>
+				<plugins>
+					<plugin>
+			          <groupId>org.codehaus.mojo</groupId>
+			          <artifactId>rpm-maven-plugin</artifactId>
+			          <executions>
+				          <execution>
+				            <id>generate-rpm</id>
+				            <phase>package</phase>
+				            <goals>
+				              <goal>rpm</goal> 
+				            </goals>
+				          </execution>
+				      </executions>
+				      <configuration>
+					      	<group>Verifone/MMS</group>
+					      	<packager>Verifone</packager>
+					      	<targetOS>linux</targetOS>
+					      	<release>${rpm.release}</release>
+		      	
+					      	<defaultUsername>${app.username}</defaultUsername>
+					      	<defaultGroupname>${app.group}</defaultGroupname>
+					      	<defaultDirmode>755</defaultDirmode>
+					      	<defaultFilemode>755</defaultFilemode>
+		      	
+					      	<mappings>
+					      		<mapping>
+									<directory>${app.home}</directory>
+									<sources>
+										<source>
+											<location>${project.build.directory}/${project.build.finalName}.jar</location>
+										</source>
+									</sources>
+								</mapping>
+								<mapping>
+									<directory>/etc/systemd/system/</directory>
+									<sources>
+										<source>
+											<location>${project.build.directory}/deployment/${project.artifactId}.service</location>
+										</source>
+									</sources>
+									<directoryIncluded>false</directoryIncluded>
+			                    	<configuration>false</configuration>
+								</mapping>
+								<mapping>
+									<directory>${app.home}</directory>
+									<sources>
+										<source>
+											<location>${project.build.directory}/deployment/${project.artifactId}.conf</location>
+										</source>
+									</sources>
+									<directoryIncluded>false</directoryIncluded>
+			                    	<configuration>false</configuration>
+								</mapping>
+					      	</mappings>
+					      	<preinstallScriptlet>
+			            		<script>echo "~~~~~ Installing ${project.artifactId} now...."</script>
+			          		</preinstallScriptlet>
+			          		<postinstallScriptlet>
+			          			<script>
+			          				echo "~~~~~ Copying ${project.artifactId}.service into /etc/systemd/system/"; \
+			          				sudo systemctl daemon-reload; \
+			          				sudo systemctl restart ${project.artifactId}.service; \
+			          				echo "~~~~~ Finished Service installation"
+			          			</script>
+							</postinstallScriptlet>
+				      	</configuration>
+				    </plugin>
+					
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+  
 
 </project>

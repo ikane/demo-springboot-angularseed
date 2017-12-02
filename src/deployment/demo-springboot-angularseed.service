@@ -1,0 +1,9 @@
+[Unit]
+Description=Demo springboot angularseed
+After=syslog.target
+
+[Service]
+ExecStart=@app.home@/@project.artifactId@.jar
+
+[Install]
+WantedBy=multi-user.target
